@@ -36,12 +36,28 @@ export function getServiceRoleKey(): string {
   );
 }
 
+function isLocalUrl(url: string): boolean {
+  try {
+    const { hostname } = new URL(url);
+    return hostname === "localhost" || hostname === "127.0.0.1";
+  } catch {
+    return false;
+  }
+}
+
 // En las previews de Vercel NEXT_PUBLIC_SITE_URL puede no estar definida;
-// se usa la URL del despliegue que Vercel inyecta en VERCEL_URL.
+// se usa la URL del despliegue que Vercel inyecta en VERCEL_URL. En Vercel
+// se ignora un valor local copiado de .env.local, que mandaría los enlaces
+// de confirmación a localhost.
 export function getSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
-  if (explicit) {
+  const onVercel = Boolean(process.env.VERCEL);
+  if (explicit && !(onVercel && isLocalUrl(explicit))) {
     return explicit.replace(/\/$/, "");
+  }
+  const productionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (process.env.VERCEL_ENV === "production" && productionUrl) {
+    return `https://${productionUrl}`;
   }
   const vercelUrl = process.env.VERCEL_URL;
   if (vercelUrl) {
