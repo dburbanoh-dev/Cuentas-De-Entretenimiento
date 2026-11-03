@@ -25,11 +25,11 @@
 
 - [x] 4.1 Implementar el proxy de sesión (`src/proxy.ts`) que refresca cookies y redirige rutas privadas a `/login` y usuarios autenticados desde `/login` y `/signup` a `/dashboard`, dejando públicas `/`, `/auth/**` y `/api/health`; verificar en el navegador que `/dashboard` sin sesión redirige a `/login`
 - [x] 4.2 Crear una utilidad que traduce errores de Supabase Auth a mensajes genéricos ("Email o contraseña incorrectos", longitud mínima, email ya registrado) con pruebas de Vitest; verificar que `npm test` las pasa
-- [ ] 4.3 Crear `/signup` con Server Action (`signUp`, validación de contraseña de 8+ caracteres) y la ruta `/auth/confirm` que canjea el token; verificar registrando un email real y confirmando desde el enlace recibido
-- [ ] 4.4 Crear `/login` con Server Action (`signInWithPassword`) que redirige a `/dashboard`; verificar inicio de sesión correcto y el mensaje genérico con contraseña incorrecta
-- [ ] 4.5 Crear la página privada `/dashboard` en `src/app/(private)/` que valida con `getUser()` en el servidor y muestra el email, más la acción de cerrar sesión; verificar que tras cerrar sesión `/dashboard` vuelve a redirigir a `/login`
+- [x] 4.3 Crear `/signup` con Server Action (`signUp`, validación de contraseña de 8+ caracteres) y la ruta `/auth/confirm` que canjea el token; verificar registrando un email real y confirmando desde el enlace recibido
+- [x] 4.4 Crear `/login` con Server Action (`signInWithPassword`) que redirige a `/dashboard`; verificar inicio de sesión correcto y el mensaje genérico con contraseña incorrecta
+- [x] 4.5 Crear la página privada `/dashboard` en `src/app/(private)/` que valida con `getClaims()` en el servidor y muestra el email, más la acción de cerrar sesión; verificar que tras cerrar sesión `/dashboard` vuelve a redirigir a `/login`
 - [x] 4.6 Añadir un Route Handler privado de ejemplo (`GET /api/me`) que responde 401 sin sesión; verificar con `curl -i` sin cookies que devuelve 401
-- [ ] 4.7 Configurar en Supabase Site URL y Redirect URLs (localhost, producción y patrón de previews) y documentarlo en `README.md`; verificar que el enlace de confirmación vuelve a la app en local
+- [x] 4.7 Configurar en Supabase Site URL y Redirect URLs (localhost, producción y patrón de previews) y documentarlo en `README.md`; verificar que el enlace de confirmación vuelve a la app en local
 - [x] 4.8 Verificar que la service role key no llega al cliente buscando su valor en `.next/static` tras `npm run build` (no debe aparecer)
 
 ## 5. Despliegue en Vercel
